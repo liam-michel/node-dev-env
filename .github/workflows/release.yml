@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  upload-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload start.sh
+        uses: softprops/action-gh-release@v2
+        with:
+          files: start.sh
+
+      - name: Upload Dockerfile.release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: Dockerfile.release
+
+      - name: Upload docker-compose.release.yml
+        uses: softprops/action-gh-release@v2
+        with:
+          files: docker-compose.release.yml
