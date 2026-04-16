@@ -25,6 +25,12 @@ mkdir -p "$DEV_ENVIRONMENT_DIRECTORY/$PROJECT_NAME"
 #copy template files to new project directory
 cp -r $HOME/template/. "$DEV_ENVIRONMENT_DIRECTORY/$PROJECT_NAME/"
 
+#update package.json name to match project name
+sed -i "s/\"name\": \"code\"/\"name\": \"$PROJECT_NAME\"/" "$DEV_ENVIRONMENT_DIRECTORY/$PROJECT_NAME/package.json"
+
+#update launch.json remoteRoot to match project path
+sed -i "s|\"remoteRoot\": \"/home/dev-user/dev-environment\"|\"remoteRoot\": \"/home/dev-user/dev-environment/$PROJECT_NAME\"|" "$DEV_ENVIRONMENT_DIRECTORY/$PROJECT_NAME/.vscode/launch.json"
+
 echo "Project '$PROJECT_NAME' created successfully in dev environment."
 
 exit 0

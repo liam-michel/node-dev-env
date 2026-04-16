@@ -25,6 +25,7 @@ WORKDIR /tmp
 #copy in user-group.sh script
 COPY scripts /tmp/scripts
 COPY code /tmp/code
+RUN ls -la /tmp/code/
 
 
 
@@ -39,7 +40,7 @@ USER root
 
 #move executables and template to proper locations
 RUN mkdir -p /home/dev-user/template \
-    && mv /tmp/code/* /home/dev-user/template/ \
+    && cp -a /tmp/code/. /home/dev-user/template/ \
     && mv /tmp/scripts/entrypoint.sh /usr/local/bin/entrypoint \
     && mv /tmp/scripts/user-group.sh /usr/local/bin/user-group \
     && mv /tmp/scripts/newproject.sh /usr/local/bin/newproject \
