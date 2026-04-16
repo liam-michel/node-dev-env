@@ -5,7 +5,7 @@ A containerised Node.js/TypeScript development environment. Handles dependencies
 ## Quickstart
 
 ```bash
-curl -fsSL https://github.com/liam-michel/node-dev-env/releases/latest/download/start.sh | bash
+/bin/bash -c "$(curl -fsSL https://github.com/liam-michel/node-dev-env/releases/latest/download/start.sh)"
 ```
 
 This will:
