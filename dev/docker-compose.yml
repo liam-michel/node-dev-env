@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  dev-env:
+    build:
+      context: '..'
+      dockerfile: dev/Dockerfile
+      args:
+        USER_ID: '${USER_ID:-1000}'
+        GROUP_ID: '${GROUP_ID:-1000}'
+
+    user: dev-user
+    container_name: dev-env
+    volumes:
+      - '$HOME/.dev/dev-environment:/home/dev-user/dev-environment'
+      - '$HOME/.dev-user-config:/home/dev-user/.dev-user-config'
+
+    environment:
+      - TEST_ENV=development
+      - NODE_ENV=development
+
+    ports:
+      - '9229:9229' # For Node.js debugging
+
+    stdin_open: true # same as -i i docker run
+    tty: true # same as -t in docker run
+    entrypoint: ["/bin/bash", "-c", "if entrypoint; then bash; else exit 1; fi"]
